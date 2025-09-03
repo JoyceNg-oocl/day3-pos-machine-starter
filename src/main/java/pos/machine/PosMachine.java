@@ -85,6 +85,26 @@ public class PosMachine {
         return result;
     }
 
+    private List<ItemWithPrice> lookupItem(List<String> barcodes) {
+        List<Item> allItems = ItemsLoader.loadAllItems();
+
+        Map<String, Item> itemMap = new LinkedHashMap<>();
+        for (Item item : allItems) {
+            itemMap.put(item.getBarcode(), item);
+        }
+
+        List<ItemQuantity> items = new ArrayList<>();
+        for (String bc : barcodes) {
+            Item item = itemMap.get(bc);
+            String name = (item != null) ? item.getName() : "Unknown";
+            items.add(new ItemQuantity(bc, name, 1));
+        }
+
+        List<ItemQuantity> counted = countQuantity(items);
+//        List<ItemQuantity> sorted = sortOccurrence(counted);
+        return searchUnitPrice(counted);
+    }
+
     public String printReceipt(List<String> barcodes) {
         return null;
     }
