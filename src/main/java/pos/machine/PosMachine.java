@@ -156,7 +156,13 @@ public class PosMachine {
         return generateReceipt(itemReceipts, total);
     }
 
+    private String createReceiptByBarcode(List<String> barcodes) {
+        List<ItemWithPrice> withPrices = lookupItem(barcodes);
+        AmountResult amountResult = calculateAmount(withPrices);
+        return createReceiptFormat(amountResult.receiptItems, amountResult.total);
+    }
+
     public String printReceipt(List<String> barcodes) {
-        return null;
+        return createReceiptByBarcode(barcodes);
     }
 }
