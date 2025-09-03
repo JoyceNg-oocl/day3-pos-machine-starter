@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class PosMachine {
         static class ItemQuantity {
@@ -52,15 +53,21 @@ public class PosMachine {
     }
 
     private List<ItemQuantity> countQuantity(List<ItemQuantity> items) {
-    Map<String, ItemQuantity> map = new LinkedHashMap<>();
-    for (ItemQuantity iq : items) {
-        if (map.containsKey(iq.barcode)) {
-            map.get(iq.barcode).quantity++;
-        } else {
-            map.put(iq.barcode, new ItemQuantity(iq.barcode, iq.name, 1));
+        Map<String, ItemQuantity> map = new LinkedHashMap<>();
+        for (ItemQuantity iq : items) {
+            if (map.containsKey(iq.barcode)) {
+                map.get(iq.barcode).quantity++;
+            } else {
+                map.put(iq.barcode, new ItemQuantity(iq.barcode, iq.name, 1));
+            }
         }
+        return new ArrayList<>(map.values());
     }
-    return new ArrayList<>(map.values());
+
+    private List<ItemQuantity> sortOccurrence(List<ItemQuantity> items) {
+        List<ItemQuantity> sortedList = new ArrayList<>(items);
+        sortedList.sort((a, b) -> b.quantity - a.quantity);
+        return sortedList;
     }
 
     public String printReceipt(List<String> barcodes) {
