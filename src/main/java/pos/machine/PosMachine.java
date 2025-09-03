@@ -129,6 +129,28 @@ public class PosMachine {
         return new AmountResult(receiptItems, total);
     }
 
+    private List<String> generateItemReceipt(List<ReceiptItem> items) {
+        List<String> receipts = new ArrayList<>();
+        for (ReceiptItem item : items) {
+            String line = "Name: " + item.name + ", Quantity: " + item.quantity +
+                    ", Unit price: " + item.unitPrice + " (yuan), Subtotal: " + item.subTotal + " (yuan)";
+            receipts.add(line);
+        }
+        return receipts;
+    }
+
+    private String generateReceipt(List<String> itemReceipts, int total) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("***<store earning no money>Receipt***\n");
+        for (String line : itemReceipts) {
+            sb.append(line).append("\n");
+        }
+        sb.append("----------------------\n");
+        sb.append(String.format("Total: %d (yuan)\n", total));
+        sb.append("**********************");
+        return sb.toString();
+    }
+    
     public String printReceipt(List<String> barcodes) {
         return null;
     }
