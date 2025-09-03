@@ -1,6 +1,9 @@
 package pos.machine;
 
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 public class PosMachine {
         static class ItemQuantity {
@@ -40,13 +43,26 @@ public class PosMachine {
         }
     }
     private static class AmountResult {
-    List<ReceiptItem> receiptItems;
-    int total;
-    AmountResult(List<ReceiptItem> receiptItems, int total) {
-        this.receiptItems = receiptItems;
-        this.total = total;
+        List<ReceiptItem> receiptItems;
+        int total;
+        AmountResult(List<ReceiptItem> receiptItems, int total) {
+            this.receiptItems = receiptItems;
+            this.total = total;
+        }
     }
+
+    private List<ItemQuantity> countQuantity(List<ItemQuantity> items) {
+    Map<String, ItemQuantity> map = new LinkedHashMap<>();
+    for (ItemQuantity iq : items) {
+        if (map.containsKey(iq.barcode)) {
+            map.get(iq.barcode).quantity++;
+        } else {
+            map.put(iq.barcode, new ItemQuantity(iq.barcode, iq.name, 1));
+        }
     }
+    return new ArrayList<>(map.values());
+    }
+
     public String printReceipt(List<String> barcodes) {
         return null;
     }
