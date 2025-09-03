@@ -61,3 +61,7 @@ The database is as follows:
 2. Please declare all the methods according to your diagram.
 3. Please write implementations according to the task diagram
 4. Please repeat step 3 until all functions are implemented and make sure test case can pass.
+
+
+# Context Map
+[Context Map](https://excalidraw.com/#json=1AHr1p9ZQNSZVpHi4ShRv,WjUsVqFJUn2OmwxgIeeCDQ)
