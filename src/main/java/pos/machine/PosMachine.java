@@ -70,6 +70,21 @@ public class PosMachine {
         return sortedList;
     }
 
+    private List<ItemWithPrice> searchUnitPrice(List<ItemQuantity> items) {
+        List<Item> allItems = ItemsLoader.loadAllItems();
+        Map<String, Item> itemMap = new LinkedHashMap<>();
+        for (Item item : allItems) {
+            itemMap.put(item.getBarcode(), item);
+        }
+        List<ItemWithPrice> result = new ArrayList<>();
+        for (ItemQuantity iq : items) {
+            Item item = itemMap.get(iq.barcode);
+            int price = (item != null) ? item.getPrice() : 0;
+            result.add(new ItemWithPrice(iq.barcode, iq.name, iq.quantity, price));
+        }
+        return result;
+    }
+
     public String printReceipt(List<String> barcodes) {
         return null;
     }
