@@ -105,6 +105,16 @@ public class PosMachine {
         return searchUnitPrice(counted);
     }
 
+    private List<ReceiptItem> calculateSubTotal(List<ItemWithPrice> items) {
+        List<ReceiptItem> receiptItems = new ArrayList<>();
+        for (ItemWithPrice iwp : items) {
+            int subTotal = iwp.quantity * iwp.unitPrice;
+            ReceiptItem receiptItem = new ReceiptItem(iwp.barcode, iwp.name, iwp.quantity, iwp.unitPrice, subTotal);
+            receiptItems.add(receiptItem);
+        }
+        return receiptItems;
+    }
+
     public String printReceipt(List<String> barcodes) {
         return null;
     }
