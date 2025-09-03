@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 public class PosMachine {
-        static class ItemQuantity {
+    static class ItemQuantity {
         String barcode;
         String name;
         int quantity;
