@@ -115,6 +115,20 @@ public class PosMachine {
         return receiptItems;
     }
 
+    private int calculateTotal(List<ReceiptItem> items) {
+        int total = 0;
+        for (ReceiptItem item : items) {
+            total += item.subTotal;
+        }
+        return total;
+    }
+
+    private AmountResult calculateAmount(List<ItemWithPrice> withPrices) {
+        List<ReceiptItem> receiptItems = calculateSubTotal(withPrices);
+        int total = calculateTotal(receiptItems);
+        return new AmountResult(receiptItems, total);
+    }
+
     public String printReceipt(List<String> barcodes) {
         return null;
     }
