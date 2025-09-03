@@ -150,7 +150,12 @@ public class PosMachine {
         sb.append("**********************");
         return sb.toString();
     }
-    
+
+    private String createReceiptFormat(List<ReceiptItem> receiptItems, int total) {
+        List<String> itemReceipts = generateItemReceipt(receiptItems);
+        return generateReceipt(itemReceipts, total);
+    }
+
     public String printReceipt(List<String> barcodes) {
         return null;
     }
