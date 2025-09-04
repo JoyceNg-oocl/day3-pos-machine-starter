@@ -95,7 +95,10 @@ public class PosMachine {
         List<ItemQuantity> items = new ArrayList<>();
         for (String bc : barcodes) {
             Item item = itemMap.get(bc);
-            String name = (item != null) ? item.getName() : "Unknown";
+            if (item == null) {
+                    throw new IllegalArgumentException("Unknown barcode: " + bc);
+            }
+            String name =  item.getName();
             items.add(new ItemQuantity(bc, name, 1));
         }
 
